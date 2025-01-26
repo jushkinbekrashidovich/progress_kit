@@ -21,6 +21,8 @@ class HomeController extends GetxController {
   }
 
 
+  //to chang the widget ui
+
   void toggleViewMode() {
     List<String> modes = ['days', 'hours', 'weeks', 'months', 'years'];
     int currentIndex = modes.indexOf(viewMode.value);
