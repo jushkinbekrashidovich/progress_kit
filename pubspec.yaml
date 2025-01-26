@@ -37,6 +37,7 @@ dependencies:
   get: ^4.6.6
   shared_preferences: ^2.4.0
   bottom_picker: ^2.10.1
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:

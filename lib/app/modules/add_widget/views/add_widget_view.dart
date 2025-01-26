@@ -18,7 +18,9 @@ class AddWidgetView extends GetView<AddWidgetController> {
         centerTitle: true,
         actions: [
           TextButton(
-            onPressed: controller.saveProgress,
+            onPressed: (){
+             controller.saveProgress();
+            },
             child: Text(
               "SAVE",
               style: TextStyle(

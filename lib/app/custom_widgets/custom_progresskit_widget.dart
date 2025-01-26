@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProgressCard extends StatelessWidget {
   final String title;
@@ -36,28 +37,37 @@ class ProgressCard extends StatelessWidget {
     DateTime end = DateTime.parse(endDate);
     DateTime now = DateTime.now();
 
-    int totalDays = end.difference(start).inDays + 1; // Include the end date.
+    int totalDays = end.difference(start).inDays + 1; // Include end date.
     int passedDays = now.isAfter(start) ? now.difference(start).inDays : 0;
 
+    // Determine dot size based on the total number of days
+    double dotSize = totalDays <= 10
+        ? 20.0 // Large dots for small ranges
+        : totalDays <= 30
+        ? 14.0 // Medium dots for mid ranges
+        : 8.0; // Small dots for larger ranges
+
     return Wrap(
-      spacing: 4,
-      runSpacing: 4,
+      spacing: 8, // Space between dots
+      runSpacing: 8, // Space between rows
       children: List.generate(
         totalDays,
-            (index) => Icon(
-          Icons.circle,
-          size: 8,
-          color: index < passedDays
-              ? Colors.white // Passed days
-              : Colors.white, // Remaining days
-        ),
+            (index) {
+          DateTime currentDate = start.add(Duration(days: index));
+          return Icon(
+            Icons.circle,
+            size: dotSize,
+            color: currentDate.isBefore(now)
+                ? Colors.grey // Passed days
+                : Colors.white, // Today and remaining days
+          );
+        },
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    double completionPercentage = _calculateCompletionPercentage();
     return Card(
       color: Colors.black,
       margin: const EdgeInsets.symmetric(vertical: 10),
@@ -66,21 +76,26 @@ class ProgressCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 10,),
+            _buildDotGrid(),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   title,
-                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                  style: GoogleFonts.inconsolata(
+                      color: Colors.white, fontSize: 12
+                  ),
+
+
                 ),
                 Text(
                   _calculateTimeLeft(),
-                  style: const TextStyle(color: Colors.white70, fontSize: 14),
+                  style:  GoogleFonts.inconsolata(color: Colors.white70, fontSize: 12),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
-            _buildDotGrid(),
           ],
         ),
       ),
