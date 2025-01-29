@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:progress_kit/app/routes/app_pages.dart';
+import '../../../const/theme/app_colors.dart';
 import '../../../custom_widgets/custom_progresskit_widget.dart';
 import '../controllers/home_controller.dart';
 
@@ -13,11 +14,11 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text('ProgressKit', style: GoogleFonts.roboto(fontSize: 18),),
+        title:  Text('ProgressKit',style: GoogleFonts.inconsolata(fontSize: 17.5, color: AppColors.white),),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            // Navigate to settings
+            Get.toNamed(Routes.SETTINGS);
           },
           icon: const Icon(CupertinoIcons.settings),
         ),
@@ -32,10 +33,10 @@ class HomeView extends GetView<HomeController> {
       ),
       body: Obx(() {
         if (controller.progressList.isEmpty) {
-          return const Center(
+          return Center(
             child: Text(
               'No progress entries yet!',
-              style: TextStyle(fontSize: 20),
+                style: GoogleFonts.inconsolata(fontSize: 20, color: AppColors.white),
             ),
           );
         }

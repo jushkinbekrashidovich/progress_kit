@@ -2,6 +2,7 @@ import 'package:bottom_picker/bottom_picker.dart';
 import 'package:bottom_picker/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:progress_kit/app/const/theme/app_colors.dart';
 import 'package:progress_kit/app/custom_widgets/custom_text_field.dart';
 
@@ -14,7 +15,7 @@ class AddWidgetView extends GetView<AddWidgetController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add'),
+        title:  Text('Add' ,style: GoogleFonts.inconsolata(fontWeight: FontWeight.bold, fontSize: 18, color: AppColors.white),),
         centerTitle: true,
         actions: [
           TextButton(
@@ -23,10 +24,7 @@ class AddWidgetView extends GetView<AddWidgetController> {
             },
             child: Text(
               "SAVE",
-              style: TextStyle(
-                color: AppColors.white,
-                fontWeight: FontWeight.bold,
-              ),
+              style: GoogleFonts.inconsolata(fontWeight: FontWeight.bold, fontSize: 18, color: AppColors.white),
             ),
           ),
         ],
@@ -38,28 +36,33 @@ class AddWidgetView extends GetView<AddWidgetController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Title
-              const Text(
+               Text(
                 "Title",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+                style: GoogleFonts.inconsolata(fontWeight: FontWeight.w700, fontSize: 14),
               ),
               const SizedBox(height: 10),
-              CustomTextField(textEditingController: controller.titleController),
+              SizedBox(
+                  height: 44,
+                  child: CustomTextField(textEditingController: controller.titleController)),
               const SizedBox(height: 14),
 
               // Description
-              const Text(
+               Text(
                 "Description",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+                style: GoogleFonts.inconsolata(fontWeight: FontWeight.w700, fontSize: 14),
               ),
               const SizedBox(height: 10),
-              CustomTextField(
-                  textEditingController: controller.descriptionController),
+              SizedBox(
+                height: 44,
+                child: CustomTextField(
+                    textEditingController: controller.descriptionController),
+              ),
               const SizedBox(height: 14),
 
               // Date Range
-              const Text(
+               Text(
                 "Select time range",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+                style: GoogleFonts.inconsolata(fontWeight: FontWeight.w700, fontSize: 14),
               ),
               const SizedBox(height: 10),
               GestureDetector(
@@ -75,7 +78,7 @@ class AddWidgetView extends GetView<AddWidgetController> {
                   child: Obx(
                         () => Text(
                       controller.dateRangeText.value.isEmpty
-                          ? "Select"
+                          ? "Click"
                           : controller.dateRangeText.value,
                       style: TextStyle(
                         color: controller.dateRangeText.value.isEmpty
@@ -93,27 +96,33 @@ class AddWidgetView extends GetView<AddWidgetController> {
                 children: [
                   Expanded(
                     child: Obx(
-                          () => TextField(
-                        enabled: false,
-                        controller: TextEditingController(
-                          text: controller.startDate.value,
-                        ),
-                        decoration: _inputDecoration("Start Date"),
-                        style: const TextStyle(color: Colors.white),
-                      ),
+                          () => SizedBox(
+                            height: 44,
+                            child: TextField(
+                                                    enabled: false,
+                                                    controller: TextEditingController(
+                            text: controller.startDate.value,
+                                                    ),
+                                                    decoration: _inputDecoration("Start Date"),
+                                                    style: GoogleFonts.inconsolata(color: AppColors.white, fontSize: 14),
+                                                  ),
+                          ),
                     ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
                     child: Obx(
-                          () => TextField(
-                        enabled: false,
-                        controller: TextEditingController(
-                          text: controller.endDate.value,
-                        ),
-                        decoration: _inputDecoration("End Date"),
-                        style: const TextStyle(color: Colors.white),
-                      ),
+                          () => SizedBox(
+                            height: 44,
+                            child: TextField(
+                                                    enabled: false,
+                                                    controller: TextEditingController(
+                            text: controller.endDate.value,
+                                                    ),
+                                                    decoration: _inputDecoration("End Date"),
+                                                    style: GoogleFonts.inconsolata(color: AppColors.white, fontSize: 14),
+                                                  ),
+                          ),
                     ),
                   ),
                 ],
@@ -121,10 +130,7 @@ class AddWidgetView extends GetView<AddWidgetController> {
               const SizedBox(height: 14),
 
               // Color Picker
-              const Text(
-                "Select Color",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
-              ),
+
               const SizedBox(height: 10),
 
             ],

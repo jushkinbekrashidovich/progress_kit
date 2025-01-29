@@ -4,6 +4,7 @@ import 'package:bottom_picker/resources/arrays.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:progress_kit/app/const/theme/app_colors.dart';
 import 'package:progress_kit/app/modules/home/controllers/home_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -95,25 +96,28 @@ class AddWidgetController extends GetxController {
   /// Select date range using BottomPicker
   void selectDateRange() {
     BottomPicker.range(
-      pickerTitle: const Text(
-        'Set date range',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 15,
-          color: Colors.black,
+      dismissable: true,
+      pickerTitle: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: const Text(
+          'Please select a first date and an end date',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+            color: Colors.black,
+          ),
         ),
       ),
-      pickerDescription: const Text(
-        'Please select a first date and an end date',
-        style: TextStyle(
-          color: Colors.black,
-        ),
-      ),
+
       dateOrder: DatePickerDateOrder.dmy,
-      minFirstDate: DateTime(1200),
+      minFirstDate: DateTime(1970),
       initialFirstDate: DateTime.now().add(const Duration(days: 1)),
+      maxSecondDate: DateTime(2200),
+      maxFirstDate: DateTime(2200),
+      minSecondDate: DateTime(1970),
+      buttonSingleColor: AppColors.black,
       pickerTextStyle: const TextStyle(
-        color: Colors.blue,
+        color: Colors.black,
         fontWeight: FontWeight.bold,
         fontSize: 12,
       ),

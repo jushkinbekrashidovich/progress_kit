@@ -5,6 +5,12 @@ import 'package:progress_kit/app/data/progress_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
+
+
+
+
+
+
   // Observable progress list
   RxList<ProgressModel> progressList = <ProgressModel>[].obs;
 
