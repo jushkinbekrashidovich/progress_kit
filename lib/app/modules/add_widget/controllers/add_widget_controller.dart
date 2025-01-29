@@ -114,7 +114,7 @@ class AddWidgetController extends GetxController {
       initialFirstDate: DateTime.now().add(const Duration(days: 1)),
       maxSecondDate: DateTime(2200),
       maxFirstDate: DateTime(2200),
-      minSecondDate: DateTime(1970),
+      minSecondDate: DateTime.now(),
       buttonSingleColor: AppColors.black,
       pickerTextStyle: const TextStyle(
         color: Colors.black,

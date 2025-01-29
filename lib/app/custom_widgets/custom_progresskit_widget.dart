@@ -32,8 +32,7 @@ class ProgressCard extends StatelessWidget {
     return (passedDays / totalDays) * 100;
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildDotGrid() {
     DateTime start = DateTime.parse(startDate);
     DateTime end = DateTime.parse(endDate);
     DateTime now = DateTime.now();
@@ -41,48 +40,53 @@ class ProgressCard extends StatelessWidget {
     int totalDays = end.difference(start).inDays + 1; // Include end date.
     int passedDays = now.isAfter(start) ? now.difference(start).inDays : 0;
 
+    // Determine dot size based on the total number of days
+    double dotSize = totalDays <= 12
+        ? 32.0 // Large dots for small ranges
+        : totalDays <= 46
+        ? 26.0 // Medium dots for mid ranges
+    : totalDays <= 62
+    ? 22.0
+        : totalDays <= 100
+        ? 18.0
+        : totalDays <= 362
+        ? 12.0
+
+        : 6.0; // Small dots for larger ranges
+
+    return
+      Wrap(
+      spacing: 6, // Space between dots
+      runSpacing: 6, // Space between rows
+      children: List.generate(
+        totalDays,
+            (index) {
+          DateTime currentDate = start.add(Duration(days: index));
+          return Icon(
+            Icons.circle,
+            size: dotSize,
+            color: currentDate.isBefore(now)
+                ? Colors.grey[700] // Passed days
+                : Colors.white, // Today and remaining days
+          );
+        },
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Card(
+
       color: Colors.black,
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  double availableWidth = constraints.maxWidth;
-                  double spacing = 6; // Adjust spacing dynamically if needed
-                  int crossAxisCount = (availableWidth / 20).floor(); // Dynamically calculate columns
-                  double dotSize = (availableWidth / crossAxisCount) - spacing;
-                  return GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: crossAxisCount,
-                      crossAxisSpacing: spacing,
-                      mainAxisSpacing: spacing,
-                    ),
-                    itemCount: totalDays,
-                    itemBuilder: (context, index) {
-                      DateTime currentDate = start.add(Duration(days: index));
-                      return Container(
-                        width: dotSize,
-                        height: dotSize,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: currentDate.isBefore(now)
-                              ? Colors.grey // Passed days
-                              : Colors.white, // Today and remaining days
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
-            ),
+            SizedBox(height: 10,),
+            _buildDotGrid(),
             const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,16 +94,12 @@ class ProgressCard extends StatelessWidget {
                 Text(
                   title,
                   style: GoogleFonts.inconsolata(
-                    color: Colors.white,
-                    fontSize: 12,
+                      color: Colors.white, fontSize: 12
                   ),
                 ),
                 Text(
                   _calculateTimeLeft(),
-                  style: GoogleFonts.inconsolata(
-                    color: Colors.white70,
-                    fontSize: 12,
-                  ),
+                  style:  GoogleFonts.inconsolata(color: Colors.white70, fontSize: 12),
                 ),
               ],
             ),
