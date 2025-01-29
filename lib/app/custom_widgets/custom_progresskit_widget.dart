@@ -49,10 +49,14 @@ class ProgressCard extends StatelessWidget {
     ? 22.0
         : totalDays <= 100
         ? 18.0
-        : totalDays <= 362
+        : totalDays <= 188
         ? 12.0
 
-        : 6.0; // Small dots for larger ranges
+        : totalDays <= 290
+    ? 10.0
+
+        :
+    8.0; // Small dots for larger ranges
 
     return
       Wrap(
