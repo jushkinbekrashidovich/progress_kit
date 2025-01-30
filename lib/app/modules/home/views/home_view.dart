@@ -76,23 +76,22 @@ class HomeView extends GetView<HomeController> {
         );
       }),
 
-
-      // bottomSheet: BottomSheet(
-      //   onClosing: () {},
-      //   builder: (context) {
-      //     return Container(
-      //       height: 60,
-      //       color: Colors.grey[300],
-      //       child: Center(
-      //         child: TextButton(
-      //           onPressed: controller.toggleViewMode,
-      //           child: Obx(() => Text(
-      //             'Switch View: ${controller.viewMode.value.capitalizeFirst}',
-      //             style: const TextStyle(fontSize: 16, color: Colors.black),
-      //           )),
-      //         ),
-      //       ),
-      //     );
+      bottomSheet: BottomSheet(
+        onClosing: () {},
+        builder: (context) {
+          return Container(
+            height: 60,
+            color: Colors.grey[300],
+            child: Center(
+              child: TextButton(
+                onPressed: controller.toggleViewMode,
+                child: Obx(() => Text(
+                  'Switch View: ${controller.viewMode.value.capitalizeFirst}',
+                  style: const TextStyle(fontSize: 16, color: Colors.black),
+                )),
+              ),
+            ),
+         );}),
       //   },
       // ),
     );
