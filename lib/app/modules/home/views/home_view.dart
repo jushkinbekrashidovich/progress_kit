@@ -75,6 +75,8 @@ class HomeView extends GetView<HomeController> {
           ],
         );
       }),
+
+
       // bottomSheet: BottomSheet(
       //   onClosing: () {},
       //   builder: (context) {

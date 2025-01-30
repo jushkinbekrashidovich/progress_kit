@@ -36,7 +36,7 @@ class SettingsView extends StatelessWidget {
               children: [
                 const Icon(
                   Icons.star,
-                  color: Colors.yellow,
+                  color: Colors.white,
                 ),
                  SizedBox(width: 10,),
                  Text(
@@ -69,7 +69,7 @@ class SettingsView extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.circle, color: Colors.white, size: 9,),
-                  title:  Text('Rate the app',
+                  title:  Text('Feedback',
                     style: GoogleFonts.inconsolata(fontSize: 14, color: AppColors.white),),
                   onTap: () {
                     // Handle Rate the App
@@ -78,7 +78,7 @@ class SettingsView extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.circle, color: Colors.white, size: 9,),
-                  title:  Text('Rate the app',
+                  title:  Text('Request a feature',
                     style: GoogleFonts.inconsolata(fontSize: 14, color: AppColors.white),),
                   onTap: () {
                     // Handle Rate the App
@@ -89,7 +89,7 @@ class SettingsView extends StatelessWidget {
               ],
             ),
           ),
-
+         Text("Version 1.0.0"),
         ],
       ),
     );
