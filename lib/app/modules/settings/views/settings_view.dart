@@ -69,6 +69,15 @@ class SettingsView extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.circle, color: Colors.white, size: 9,),
+                  title:  Text('Privacy Policy',
+                    style: GoogleFonts.inconsolata(fontSize: 14, color: AppColors.white),),
+                  onTap: () {
+                    // Handle Rate the App
+                  },
+                  trailing: Icon(Icons.arrow_forward_ios, color: AppColors.white,size: 14,),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.circle, color: Colors.white, size: 9,),
                   title:  Text('Feedback',
                     style: GoogleFonts.inconsolata(fontSize: 14, color: AppColors.white),),
                   onTap: () {
@@ -81,7 +90,7 @@ class SettingsView extends StatelessWidget {
                   title:  Text('Request a feature',
                     style: GoogleFonts.inconsolata(fontSize: 14, color: AppColors.white),),
                   onTap: () {
-                    // Handle Rate the App
+
                   },
                   trailing: Icon(Icons.arrow_forward_ios, color: AppColors.white,size: 14,),
                 ),

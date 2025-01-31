@@ -6,6 +6,8 @@ abstract class Routes {
   static const HOME = _Paths.HOME;
   static const ADD_WIDGET = _Paths.ADD_WIDGET;
   static const SETTINGS = _Paths.SETTINGS;
+  static const PRIVACY_POLICY = _Paths.PRIVACY_POLICY;
+  static const PAYWALL = _Paths.PAYWALL;
 }
 
 abstract class _Paths {
@@ -13,4 +15,6 @@ abstract class _Paths {
   static const HOME = '/home';
   static const ADD_WIDGET = '/add-widget';
   static const SETTINGS = '/settings';
+  static const PRIVACY_POLICY = '/privacy-policy';
+  static const PAYWALL = '/paywall';
 }
