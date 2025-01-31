@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
+import 'package:progress_kit/app/routes/app_pages.dart';
 
 import '../../../const/theme/app_colors.dart';
 
@@ -23,28 +25,33 @@ class SettingsView extends StatelessWidget {
       body: Column(
         children: [
           // Subscription Section
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              color: AppColors.black,
-              borderRadius: BorderRadius.circular(8),
-            ),
-           
-            padding: const EdgeInsets.all(12.0),
-            child: Row(
-              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Icon(
-                  Icons.star,
-                  color: Colors.white,
-                ),
-                 SizedBox(width: 10,),
-                 Text(
-                  'Subscribe to ProgressKit Pro\nunlimited widgets, more features',
-                  style: GoogleFonts.inconsolata(fontSize: 13),
-                ),
+          InkWell(
+            onTap: (){
+              Get.toNamed(Routes.PAYWALL);
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                color: AppColors.black,
+                borderRadius: BorderRadius.circular(8),
+              ),
 
-              ],
+              padding: const EdgeInsets.all(12.0),
+              child: Row(
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Icon(
+                    Icons.star,
+                    color: Colors.white,
+                  ),
+                   SizedBox(width: 10,),
+                   Text(
+                    'Subscribe to ProgressKit Pro\nunlimited widgets, more features',
+                    style: GoogleFonts.inconsolata(fontSize: 13),
+                  ),
+
+                ],
+              ),
             ),
           ),
           // General Section
