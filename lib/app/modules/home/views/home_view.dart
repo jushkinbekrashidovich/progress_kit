@@ -48,18 +48,16 @@ class HomeView extends GetView<HomeController> {
                 itemCount: controller.progressList.length,
                 itemBuilder: (context, index) {
                   final progress = controller.progressList[index];
-                  return Dismissible(
-                    key: UniqueKey(),
-                    background: Container(
-                      color: Colors.red,
-                      alignment: Alignment.centerRight,
-                      padding: const EdgeInsets.only(right: 20),
-                      child: const Icon(Icons.delete, color: Colors.white),
-                    ),
-                    onDismissed: (direction) {
-                      controller.removeProgress(index);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Progress entry removed")),
+                  return
+                    GestureDetector(
+                    onTap: (){
+
+                      Get.toNamed(Routes.WIDGET_DETAILS,
+                        arguments: {
+                          'title': progress.title,
+                          'startdate': progress.startDate,  // Replace with actual date
+                          'endDate': progress.endDate,    // Replace with actual date
+                        },
                       );
                     },
                     child: ProgressCard(

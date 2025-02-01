@@ -10,6 +10,8 @@ import '../modules/privacy_policy/bindings/privacy_policy_binding.dart';
 import '../modules/privacy_policy/views/privacy_policy_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
 import '../modules/settings/views/settings_view.dart';
+import '../modules/widget_details/bindings/widget_details_binding.dart';
+import '../modules/widget_details/views/widget_details_view.dart';
 
 part 'app_routes.dart';
 
@@ -33,16 +35,26 @@ class AppPages {
         name: _Paths.SETTINGS,
         page: () => const SettingsView(),
         binding: SettingsBinding(),
-        transition: Transition.noTransition),
+        transition: Transition.noTransition,
+
+    ),
     GetPage(
       name: _Paths.PRIVACY_POLICY,
       page: () => const PrivacyPolicyView(),
       binding: PrivacyPolicyBinding(),
+      transition: Transition.noTransition,
     ),
     GetPage(
       name: _Paths.PAYWALL,
       page: () => const PaywallView(),
       binding: PaywallBinding(),
+      transition: Transition.noTransition,
+    ),
+    GetPage(
+      name: _Paths.WIDGET_DETAILS,
+      page: () => const WidgetDetailsView(),
+      binding: WidgetDetailsBinding(),
+      transition: Transition.noTransition,
     ),
   ];
 }

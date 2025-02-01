@@ -57,7 +57,7 @@ class AddWidgetController extends GetxController {
       Get.snackbar("Success", "Progress saved successfully!",
           snackPosition: SnackPosition.BOTTOM);
       Get.find<HomeController>().loadProgressEntries();
-      Get.back();
+
     } else {
       Get.snackbar("Error", "Please fill all fields before saving!",
           snackPosition: SnackPosition.BOTTOM);
@@ -85,13 +85,6 @@ class AddWidgetController extends GetxController {
     await prefs.setStringList('progressList', progressJsonList);
   }
 
-  /// Delete a progress item
-  Future<void> deleteProgress(int index) async {
-    progressList.removeAt(index);
-    await _saveToSharedPreferences(); // Update local storage after deletion
-    Get.snackbar("Deleted", "Progress removed successfully!",
-        snackPosition: SnackPosition.BOTTOM);
-  }
 
   /// Select date range using BottomPicker
   void selectDateRange() {
@@ -100,10 +93,10 @@ class AddWidgetController extends GetxController {
       pickerTitle: Padding(
         padding: const EdgeInsets.all(8.0),
         child: const Text(
-          'Please select a first date and an end date',
+          'Select a start and end date to track progress',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 15,
+            fontSize: 13,
             color: Colors.black,
           ),
         ),
@@ -111,7 +104,7 @@ class AddWidgetController extends GetxController {
 
       dateOrder: DatePickerDateOrder.dmy,
       minFirstDate: DateTime(1970),
-      initialFirstDate: DateTime.now().add(const Duration(days: 1)),
+      initialFirstDate: DateTime.now(),
       maxSecondDate: DateTime(2200),
       maxFirstDate: DateTime(2200),
       minSecondDate: DateTime.now(),
@@ -128,5 +121,12 @@ class AddWidgetController extends GetxController {
       },
       bottomPickerTheme: BottomPickerTheme.plumPlate,
     ).show(Get.context!);
+  }
+
+  @override
+  void onClose() {
+    titleController.dispose();  // Dispose text controllers
+    descriptionController.dispose();
+    super.onClose();
   }
 }

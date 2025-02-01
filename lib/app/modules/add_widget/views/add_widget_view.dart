@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:progress_kit/app/const/theme/app_colors.dart';
 import 'package:progress_kit/app/custom_widgets/custom_text_field.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/add_widget_controller.dart';
 
 class AddWidgetView extends GetView<AddWidgetController> {
@@ -19,8 +20,10 @@ class AddWidgetView extends GetView<AddWidgetController> {
         centerTitle: true,
         actions: [
           TextButton(
-            onPressed: (){
-             controller.saveProgress();
+            onPressed: ()async{
+              await controller.saveProgress(); // Save progress
+              debugPrint("Navigating back..."); // Debugging
+              Get.offAllNamed(Routes.HOME);
             },
             child: Text(
               "SAVE",
@@ -46,19 +49,19 @@ class AddWidgetView extends GetView<AddWidgetController> {
                   child: CustomTextField(textEditingController: controller.titleController)),
               const SizedBox(height: 14),
 
-              // Description
-               Text(
-                "Description",
-                style: GoogleFonts.inconsolata(fontWeight: FontWeight.w700, fontSize: 14),
-              ),
-              const SizedBox(height: 10),
-              SizedBox(
-                height: 44,
-                child: CustomTextField(
-                    textEditingController: controller.descriptionController),
-              ),
-              const SizedBox(height: 14),
-
+              // // Description
+              //  Text(
+              //   "Description",
+              //   style: GoogleFonts.inconsolata(fontWeight: FontWeight.w700, fontSize: 14),
+              // ),
+              // const SizedBox(height: 10),
+              // SizedBox(
+              //   height: 44,
+              //   child: CustomTextField(
+              //       textEditingController: controller.descriptionController),
+              // ),
+              // const SizedBox(height: 14),
+              //
               // Date Range
                Text(
                 "Select time range",
