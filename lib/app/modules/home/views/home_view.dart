@@ -54,11 +54,15 @@ class HomeView extends GetView<HomeController> {
 
                       Get.toNamed(Routes.WIDGET_DETAILS,
                         arguments: {
+                          'index':index,
                           'title': progress.title,
                           'startdate': progress.startDate,  // Replace with actual date
                           'endDate': progress.endDate,    // Replace with actual date
                         },
+
                       );
+                      print(index.toString());
+
                     },
                     child: ProgressCard(
                       title: progress.title,

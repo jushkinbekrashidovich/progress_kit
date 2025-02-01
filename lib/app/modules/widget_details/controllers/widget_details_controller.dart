@@ -9,6 +9,7 @@ class WidgetDetailsController extends GetxController {
   late String title;
   late String startDate;
   late String endDate;
+  late int indexWidget;
 
 
 
@@ -29,17 +30,29 @@ class WidgetDetailsController extends GetxController {
         .toList();
     await prefs.setStringList('progressList', progressJsonList);
   }
+  Future<void> loadProgressEntries() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? progressJsonList = prefs.getStringList('progressList');
 
+    if (progressJsonList != null) {
+      progressList.value = progressJsonList
+          .map((progressJson) =>
+          ProgressModel.fromJson(jsonDecode(progressJson) as Map<String, dynamic>))
+          .toList();
+    }
+  }
 
   @override
   void onInit() {
+
+    loadProgressEntries();
     final arguments = Get.arguments;
 
     // Assign the values from the arguments to the variables
     title = arguments['title'];
     startDate = arguments['startdate'];
     endDate = arguments['endDate'];
-
+    indexWidget = arguments['index'];
     super.onInit();
   }
 

@@ -13,7 +13,7 @@ import '../../../data/progress_model.dart';
 class AddWidgetController extends GetxController {
   // Controllers for title and description
   final TextEditingController titleController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
+
 
   // Date range observables
   final RxString startDate = ''.obs;
@@ -32,13 +32,13 @@ class AddWidgetController extends GetxController {
   /// Save progress to the local list and SharedPreferences
   Future<void> saveProgress() async {
     if (titleController.text.isNotEmpty &&
-        descriptionController.text.isNotEmpty &&
+
         startDate.isNotEmpty &&
         endDate.isNotEmpty) {
       // Create a ProgressModel instance
       ProgressModel progress = ProgressModel(
         title: titleController.text,
-        description: descriptionController.text,
+
         startDate: startDate.value,
         endDate: endDate.value,
       );
@@ -49,7 +49,7 @@ class AddWidgetController extends GetxController {
 
       // Clear input fields
       titleController.clear();
-      descriptionController.clear();
+
       startDate.value = '';
       endDate.value = '';
       dateRangeText.value = '';
@@ -126,7 +126,7 @@ class AddWidgetController extends GetxController {
   @override
   void onClose() {
     titleController.dispose();  // Dispose text controllers
-    descriptionController.dispose();
+
     super.onClose();
   }
 }
