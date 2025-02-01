@@ -5,10 +5,11 @@ import 'package:get/get.dart';
 import 'package:progress_kit/app/routes/app_pages.dart';
 
 import '../../../const/theme/app_colors.dart';
+import '../controllers/settings_controller.dart';
 
-class SettingsView extends StatelessWidget {
-  const SettingsView({Key? key}) : super(key: key);
 
+  class SettingsView extends GetView<SettingsController> {
+  const SettingsView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,33 +80,26 @@ class SettingsView extends StatelessWidget {
                   title:  Text('Privacy Policy',
                     style: GoogleFonts.inconsolata(fontSize: 14, color: AppColors.white),),
                   onTap: () {
-                    // Handle Rate the App
+                    Get.toNamed(Routes.PRIVACY_POLICY);
                   },
                   trailing: Icon(Icons.arrow_forward_ios, color: AppColors.white,size: 14,),
                 ),
                 ListTile(
                   leading: const Icon(Icons.circle, color: Colors.white, size: 9,),
-                  title:  Text('Feedback',
+                  title:  Text('Send Feedback',
                     style: GoogleFonts.inconsolata(fontSize: 14, color: AppColors.white),),
                   onTap: () {
-                    // Handle Rate the App
-                  },
-                  trailing: Icon(Icons.arrow_forward_ios, color: AppColors.white,size: 14,),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.circle, color: Colors.white, size: 9,),
-                  title:  Text('Request a feature',
-                    style: GoogleFonts.inconsolata(fontSize: 14, color: AppColors.white),),
-                  onTap: () {
+                   controller.sendFeedback();
 
                   },
                   trailing: Icon(Icons.arrow_forward_ios, color: AppColors.white,size: 14,),
                 ),
+
 
               ],
             ),
           ),
-         Text("Version 1.0.0"),
+         Text("Version: "+controller.appVersion.toString()),
         ],
       ),
     );

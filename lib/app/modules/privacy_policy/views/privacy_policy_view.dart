@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../../data/privacy_policy_html.dart';
 import '../controllers/privacy_policy_controller.dart';
 
 class PrivacyPolicyView extends GetView<PrivacyPolicyController> {
@@ -10,15 +12,19 @@ class PrivacyPolicyView extends GetView<PrivacyPolicyController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PrivacyPolicyView'),
+        title: const Text('Privacy Policy'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          'PrivacyPolicyView is working',
-          style: TextStyle(fontSize: 20),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Text(
+            AppConstParams.privacyPolicyString,
+            style: TextStyle(fontSize: 14),
+          ),
         ),
-      ),
+      )
+
     );
   }
 }

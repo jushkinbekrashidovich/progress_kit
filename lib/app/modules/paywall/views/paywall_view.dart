@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import '../../../const/theme/app_colors.dart';
 import '../controllers/paywall_controller.dart';
 
 class PaywallView extends GetView<PaywallController> {
@@ -11,10 +13,9 @@ class PaywallView extends GetView<PaywallController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "ProgressKit pro",
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          "ProgressKit pro",style: GoogleFonts.inconsolata(fontSize: 17.5, color: AppColors.white),),
         ),
-      ),
+
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
@@ -22,8 +23,8 @@ class PaywallView extends GetView<PaywallController> {
           children: [
 
             // Subscription Cards
-            _buildSubscriptionCard("Monthly", "\$1.72"),
-            _buildSubscriptionCard("Annual", "\$9.72"),
+            _buildSubscriptionCard("Monthly", "\$1.07"),
+            _buildSubscriptionCard("Annual", "\$9.07"),
 
             // Cancel Anytime Text
             const Padding(
@@ -38,7 +39,7 @@ class PaywallView extends GetView<PaywallController> {
             ),
 
             // Lifetime Card
-            _buildSubscriptionCard("Lifetime", "\$27.72", isLifetime: true),
+            _buildSubscriptionCard("Lifetime", "\$27.07", isLifetime: true),
 
             // Lifetime Description
             const Padding(
@@ -118,7 +119,7 @@ class PaywallView extends GetView<PaywallController> {
       padding: const EdgeInsets.only(bottom: 6),
       child: Row(
         children: [
-          const Icon(Icons.star, color: Colors.purple),
+          const Icon(Icons.star, color: Colors.yellow),
           const SizedBox(width: 8),
           Text(text, style: const TextStyle(fontSize: 14)),
         ],

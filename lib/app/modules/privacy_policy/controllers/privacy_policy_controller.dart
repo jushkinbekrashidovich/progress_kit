@@ -1,11 +1,18 @@
 import 'package:get/get.dart';
+import 'package:progress_kit/app/data/privacy_policy_html.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class PrivacyPolicyController extends GetxController {
-  //TODO: Implement PrivacyPolicyController
 
-  final count = 0.obs;
+  late final WebViewController controller;
+
+
+
   @override
   void onInit() {
+    controller = WebViewController()..loadHtmlString( AppConstParams.htmlPrivacy,
+
+    );
     super.onInit();
   }
 
@@ -19,5 +26,4 @@ class PrivacyPolicyController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
 }
