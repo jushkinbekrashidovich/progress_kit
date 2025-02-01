@@ -19,8 +19,7 @@ class WidgetDetailsController extends GetxController {
   Future<void> deleteProgress(int index) async {
     progressList.removeAt(index);
     await _saveToSharedPreferences(); // Update local storage after deletion
-    Get.snackbar("Deleted", "Progress removed successfully!",
-        snackPosition: SnackPosition.BOTTOM);
+
   }
 
   Future<void> _saveToSharedPreferences() async {

@@ -19,54 +19,33 @@ class WidgetDetailsView extends GetView<WidgetDetailsController> {
 appBar: AppBar(
   backgroundColor: AppColors.black,
   actions: [
+    TextButton(onPressed: (){
+      showCupertinoDialog(
+        context: Get.context!,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title: Text("Delete Widget"),
+            content: Text("Are you sure you want to delete this widget? This action cannot be undone."),
+            actions: [
+              CupertinoDialogAction(
+                  child: Text("Cancel", style: TextStyle(color: CupertinoColors.activeBlue)),
+                  onPressed: () => Get.back() // Close dialog
+              ),
+              CupertinoDialogAction(
+                isDestructiveAction: true,
+                child: Text("Delete"),
+                onPressed: () {
+                  controller.deleteProgress(controller.indexWidget);
+                  Get.offAllNamed(Routes.HOME) ; // Close dialog
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }, child: Text("Delete", style: TextStyle(color: Colors.red),))
 
-PopupMenuButton<String>(
-onSelected: (String value) {
-        // Handle the selected option here
-        if (value == 'edit') {
-
-    } else if (value == 'delete') {
-
-            showCupertinoDialog(
-              context: Get.context!,
-              builder: (context) {
-                return CupertinoAlertDialog(
-                  title: Text("Delete Widget"),
-                  content: Text("Are you sure you want to delete this widget? This action cannot be undone."),
-                  actions: [
-                    CupertinoDialogAction(
-                      child: Text("Cancel", style: TextStyle(color: CupertinoColors.activeBlue)),
-                      onPressed: () => Get.back() // Close dialog
-                    ),
-                    CupertinoDialogAction(
-                      isDestructiveAction: true,
-                      child: Text("Delete"),
-                      onPressed: () {
-                       controller.deleteProgress(controller.indexWidget);
-                       Get.offAllNamed(Routes.HOME) ; // Close dialog
-                      },
-                    ),
-                  ],
-                );
-              },
-            );
-          }
-    },
-    itemBuilder: (BuildContext context) {
-    return [
-    PopupMenuItem<String>(
-    value: 'edit',
-    child: Text('Edit'),
-    ),
-    PopupMenuItem<String>(
-    value: 'delete',
-    child: Text('Delete', style: TextStyle(color: Colors.red),),
-    ),
-    ];
-    },
-    icon: Icon(Icons.more_vert, weight: 3),
-    ),
-    ],
+]
 
     ),
       body: SingleChildScrollView(

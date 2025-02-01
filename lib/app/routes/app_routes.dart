@@ -9,6 +9,7 @@ abstract class Routes {
   static const PRIVACY_POLICY = _Paths.PRIVACY_POLICY;
   static const PAYWALL = _Paths.PAYWALL;
   static const WIDGET_DETAILS = _Paths.WIDGET_DETAILS;
+  static const EDIT_WIDGET = _Paths.EDIT_WIDGET;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const PRIVACY_POLICY = '/privacy-policy';
   static const PAYWALL = '/paywall';
   static const WIDGET_DETAILS = '/widget-details';
+  static const EDIT_WIDGET = '/edit-widget';
 }

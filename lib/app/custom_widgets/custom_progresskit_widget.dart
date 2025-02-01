@@ -15,11 +15,11 @@ class ProgressCard extends StatelessWidget {
   }) : super(key: key);
 
   String _calculateTimeLeft() {
-    DateTime end = DateTime.parse(endDate);
+    DateTime end = DateTime.parse(endDate).add(Duration(days: 1)); // Include end date
     DateTime now = DateTime.now();
     Duration diff = end.difference(now);
 
-    return "${diff.inDays} days left";
+    return "${diff.inDays +1} days left";
   }
 
   double _calculateCompletionPercentage() {
@@ -27,8 +27,10 @@ class ProgressCard extends StatelessWidget {
     DateTime end = DateTime.parse(endDate);
     DateTime now = DateTime.now();
 
-    int totalDays = end.difference(start).inDays;
-    int passedDays = now.isAfter(start) ? now.difference(start).inDays : 0;
+    int totalDays = end.difference(start).inDays + 1; // Include end date
+    int passedDays = now.isBefore(start)
+        ? 0
+        : now.difference(start).inDays + 1; // Count today as ongoing
 
     return (passedDays / totalDays) * 100;
   }
@@ -39,7 +41,7 @@ class ProgressCard extends StatelessWidget {
     DateTime now = DateTime.now();
 
     int totalDays = end.difference(start).inDays + 1; // Include end date.
-    int passedDays = now.isAfter(start) ? now.difference(start).inDays : 0;
+    int passedDays = now.isBefore(start) ? 0 : now.difference(start).inDays;
 
     // Determine dot size based on the total number of days
     double dotSize = totalDays <= 12
@@ -67,10 +69,12 @@ class ProgressCard extends StatelessWidget {
         totalDays,
             (index) {
           DateTime currentDate = start.add(Duration(days: index));
+          DateTime currentDateOnly = DateTime(currentDate.year, currentDate.month, currentDate.day);
+          DateTime nowOnly = DateTime(now.year, now.month, now.day);
           return Icon(
             Icons.circle,
             size: dotSize,
-            color: currentDate.isBefore(now)
+            color: currentDateOnly.isBefore(nowOnly) || currentDateOnly.isAtSameMomentAs(now)
                 ? Colors.grey[700] // Passed days
                 : Colors.white, // Today and remaining days
           );

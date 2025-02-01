@@ -32,11 +32,10 @@ class AppPages {
         binding: AddWidgetBinding(),
         transition: Transition.noTransition),
     GetPage(
-        name: _Paths.SETTINGS,
-        page: () => const SettingsView(),
-        binding: SettingsBinding(),
-        transition: Transition.noTransition,
-
+      name: _Paths.SETTINGS,
+      page: () => const SettingsView(),
+      binding: SettingsBinding(),
+      transition: Transition.noTransition,
     ),
     GetPage(
       name: _Paths.PRIVACY_POLICY,
@@ -56,5 +55,6 @@ class AppPages {
       binding: WidgetDetailsBinding(),
       transition: Transition.noTransition,
     ),
+
   ];
 }

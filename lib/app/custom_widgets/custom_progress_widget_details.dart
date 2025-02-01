@@ -93,20 +93,23 @@ class ProgressCardDetails extends StatelessWidget {
 
             _buildDotGrid(),
             const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  title,
-                  style: GoogleFonts.inconsolata(
-                      color: Colors.white, fontSize: 12
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    title,
+                    style: GoogleFonts.inconsolata(
+                        color: Colors.white, fontSize: 12
+                    ),
                   ),
-                ),
-                Text(
-                  _calculateTimeLeft(),
-                  style:  GoogleFonts.inconsolata(color: Colors.white70, fontSize: 12),
-                ),
-              ],
+                  Text(
+                    _calculateTimeLeft(),
+                    style:  GoogleFonts.inconsolata(color: Colors.white70, fontSize: 12),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
