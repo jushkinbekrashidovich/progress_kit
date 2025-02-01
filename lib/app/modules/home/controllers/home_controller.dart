@@ -6,11 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
 
-
-
-
-
-
+   RxBool isPercentage = false.obs;
   // Observable progress list
   RxList<ProgressModel> progressList = <ProgressModel>[].obs;
 
@@ -41,7 +37,7 @@ class HomeController extends GetxController {
 
   // Toggle view mode for progress entries
   void toggleViewMode() {
-    List<String> modes = ['days', 'hours', 'weeks', 'months', 'years'];
+    List<String> modes = ['days', 'weeks', 'months', 'years'];
     int currentIndex = modes.indexOf(viewMode.value);
     viewMode.value = modes[(currentIndex + 1) % modes.length];
   }

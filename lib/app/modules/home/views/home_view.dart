@@ -23,12 +23,24 @@ class HomeView extends GetView<HomeController> {
           icon: const Icon(CupertinoIcons.settings),
         ),
         actions: [
+
+
+         Obx(()=>IconButton(
+            onPressed: () {
+
+              controller.isPercentage.value = !controller.isPercentage.value;
+
+
+            },
+            icon:  controller.isPercentage.value==false?
+            Icon(CupertinoIcons.percent):Icon(CupertinoIcons.calendar)
+          ),),
           IconButton(
             onPressed: () {
               Get.toNamed(Routes.ADD_WIDGET);
             },
             icon: const Icon(CupertinoIcons.add_circled),
-          )
+          ),
         ],
       ),
       body: Obx(() {
@@ -64,11 +76,12 @@ class HomeView extends GetView<HomeController> {
                       print(index.toString());
 
                     },
-                    child: ProgressCard(
+                    child: Obx(() => ProgressCard(
                       title: progress.title,
                       startDate: progress.startDate,
                       endDate: progress.endDate,
-                    ),
+                      isPercentage: controller.isPercentage.value, // ✅ Now inside Obx()
+                    )),
                   );
                 },
               ),
@@ -78,22 +91,7 @@ class HomeView extends GetView<HomeController> {
         );
       }),
 
-      bottomSheet: BottomSheet(
-        onClosing: () {},
-        builder: (context) {
-          return Container(
-            height: 60,
-            color: Colors.grey[300],
-            child: Center(
-              child: TextButton(
-                onPressed: controller.toggleViewMode,
-                child: Obx(() => Text(
-                  'Switch View: ${controller.viewMode.value.capitalizeFirst}',
-                  style: const TextStyle(fontSize: 16, color: Colors.black),
-                )),
-              ),
-            ),
-         );}),
+
       //   },
       // ),
     );
