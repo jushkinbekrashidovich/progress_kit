@@ -19,7 +19,7 @@
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:label="progress_kit">
+        android:label="ProgressKit">
         <receiver
             android:name=".HomeScreenWidget"
             android:exported="false">

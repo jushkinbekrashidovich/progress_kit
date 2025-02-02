@@ -7,6 +7,14 @@ import android.widget.RemoteViews
 import es.antonborri.home_widget.HomeWidgetProvider
 import es.antonborri.home_widget.HomeWidgetLaunchIntent
 
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.RectF
+import android.util.Log
+
+
 /**
  * Implementation of App Widget functionality.
  */
@@ -25,6 +33,10 @@ class HomeScreenWidget : HomeWidgetProvider() {
                     MainActivity::class.java
                 )
                 setOnClickPendingIntent(R.id.widget_container, pendingIntent)
+
+                val newWidgetText = widgetData.getString("appWidgetText", null)
+                setTextViewText(R.id.appwidget_text, newWidgetText ?:"No message set"
+                )
             }
             appWidgetManager.updateAppWidget(appWidgetId, views)
 
