@@ -30,7 +30,16 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/home_screen_widget_info" />
+            <meta-data
+                android:name="android.appwidget.previewLayout"
+                android:resource="@layout/preview_widget"/>
+
         </receiver>
+
+        <service
+            android:name=".LifeGridService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
 
         <activity
             android:name=".MainActivity"
