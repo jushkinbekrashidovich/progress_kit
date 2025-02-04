@@ -15,7 +15,7 @@
             <data android:mimeType="text/plain" />
         </intent>
     </queries>
-
+    <uses-permission android:name="com.android.vending.BILLING" />
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
@@ -30,9 +30,7 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/home_screen_widget_info" />
-            <meta-data
-                android:name="android.appwidget.previewLayout"
-                android:resource="@layout/preview_widget"/>
+
 
         </receiver>
 
