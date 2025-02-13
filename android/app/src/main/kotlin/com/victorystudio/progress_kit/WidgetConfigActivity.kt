@@ -22,40 +22,42 @@ class WidgetConfigActivity : Activity() {
 
         sharedPreferences = getSharedPreferences("ProgressKitPrefs", Context.MODE_PRIVATE)
 
-        // Get the widget ID from the intent
-        val appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
+        // Get the widget ID from intent
+        val appWidgetId = intent.extras?.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
+            ?: AppWidgetManager.INVALID_APPWIDGET_ID
 
+        // If the ID is invalid, close the activity
         if (appWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
-            setResult(Activity.RESULT_CANCELED)
             finish()
             return
         }
 
-        // Load progress titles
+        // Load progress titles from SharedPreferences
         progressList = getSavedProgressTitles()
 
         val listView: ListView = findViewById(R.id.progress_list_view)
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, progressList)
         listView.adapter = adapter
 
-        // Handle selection
         listView.setOnItemClickListener { _, _, position, _ ->
             val selectedTitle = progressList[position]
 
-            // Save selection
+            // Save selected progress title to SharedPreferences
             saveSelectedProgress(appWidgetId, selectedTitle)
 
-            // Update widget
+            // Set the result to return to the widget
+            val resultIntent = Intent()
+            resultIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+            setResult(Activity.RESULT_OK, resultIntent)
+
+            // Update the widget
             val widgetManager = AppWidgetManager.getInstance(this)
             HomeScreenWidget.updateWidget(this, widgetManager, appWidgetId)
 
-            // Return result and finish
-            val resultIntent = Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-            setResult(Activity.RESULT_OK, resultIntent)
+            // Close activity
             finish()
         }
 
-        // Handle cancel button
         val cancelButton: Button = findViewById(R.id.cancel_button)
         cancelButton.setOnClickListener {
             setResult(Activity.RESULT_CANCELED)
@@ -63,26 +65,20 @@ class WidgetConfigActivity : Activity() {
         }
     }
 
-    // Retrieve progress titles from SharedPreferences
     private fun getSavedProgressTitles(): List<String> {
-        val progressJson = sharedPreferences.getString("ProgressList", "[]") ?: "[]"
-        val progressList = mutableListOf<String>()
+        val progressTitlesJson = sharedPreferences.getString("progressTitles", "[]") ?: "[]"
+        val progressTitlesList = mutableListOf<String>()
 
-        try {
-            val jsonArray = JSONArray(progressJson)
-            for (i in 0 until jsonArray.length()) {
-                val jsonObject = jsonArray.getJSONObject(i)
-                val title = jsonObject.optString("title", "Untitled Progress")
-                progressList.add(title)
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        // Convert JSON array to a list of strings
+        val jsonArray = JSONArray(progressTitlesJson)
+        for (i in 0 until jsonArray.length()) {
+            val title = jsonArray.getString(i)
+            progressTitlesList.add(title)
         }
 
-        return progressList
+        return progressTitlesList
     }
 
-    // Save selected progress title for this widget
     private fun saveSelectedProgress(appWidgetId: Int, title: String) {
         sharedPreferences.edit().putString("Widget_$appWidgetId", title).apply()
     }
